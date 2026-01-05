@@ -1,11 +1,12 @@
-
-1.os
-2.path
-3.render 
-4.authenticate
-4.redirect
-5.login
-6.auth_login
-7.datetime
-8.requests
+django
+os
+path
+render 
+authenticate
+redirect
+login
+auth_login
+datetime
+requests
+flask
 
