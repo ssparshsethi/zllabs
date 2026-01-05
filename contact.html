@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact | ZLL</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(#4DFDD7,#242833);
+
+      color: #1b1b1b;
+    }
+
+    /* === Navbar === */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 40px;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-radius: 0 0 20px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-left img {
+      height: 65px;
+      width: auto;
+      margin-right: 20px;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-left img:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 35px;
+    }
+
+    .nav-center a {
+      text-decoration: none;
+      color: #004d66;
+      font-weight: 600;
+      font-size: 17px;
+      position: relative;
+      padding: 6px 0;
+      transition: color 0.3s ease;
+    }
+
+    .nav-center a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #00bcd4, #4dd0e1);
+      transition: width 0.3s ease;
+      border-radius: 3px;
+    }
+
+    .nav-center a:hover {
+      color: #00bcd4;
+    }
+
+    .nav-center a:hover::after {
+      width: 100%;
+    }
+
+
+    main {
+      padding: 2rem;
+      max-width: 700px;
+      margin: 70px auto;
+      background: #ffffff;
+      border-radius: 22px;
+      box-shadow: 0 8px 28px rgba(0, 188, 212, 0.15);
+      animation: fadeIn 0.7s ease-in-out;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 1.2rem;
+      font-weight: 600;
+      color: #004d66;
+    }
+
+    input, textarea {
+      padding: 0.9rem;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      border-radius: 14px;
+      border: 2px solid #d0f2f8;
+      outline: none;
+      transition: 0.3s;
+      background: #f9feff;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #00bcd4;
+      box-shadow: 0 0 8px rgba(0, 188, 212, 0.25);
+      background: #ffffff;
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, #00bcd4, #4dd0e1);
+      color: white;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 16px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #0097a7, #26c6da);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 188, 212, 0.3);
+    }
+
+    img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border-radius: 16px;
+    }
+
+    /* === Animations === */
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(15px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+      }
+      .nav-center {
+        flex-direction: column;
+        gap: 12px;
+      }
+      main {
+        margin: 30px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      {% for logo in logos %}
+      <img src="{{ logo.logo.url }}" alt="Kidpenure Logo" class="logo">
+      {% endfor %}
+    </div>
+    <div class="nav-center">
+      <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'project' %}">Projects</a>
+      <a href="{% url 'review' %}">reviews</a>
+      
+    </div>
+  </nav>
+
+  <!-- === Contact Form === -->
+  <main>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" placeholder="Write your message here..." rows="4" required></textarea>
+
+      <label for="image">Upload an image:</label>
+      <input type="file" id="image" name="image" accept="image/*">
+
+      <button type="submit">Send</button>
+    </form>
+  </main>
+
+</body>
+</html>
